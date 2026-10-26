@@ -1,0 +1,8 @@
+*.png
+
+# nix
+result
+.direnv
+
+# python
+__pycache__
