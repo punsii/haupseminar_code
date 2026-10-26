@@ -6,7 +6,7 @@ dependencies = ["numpy", "imageio"]
 
 [project.optional-dependencies]
 cpu = ["torch==2.7.1"]
-cu128 = ["torch==2.7.1", "gsplat==1.5.3"]
+cu128 = ["torch==2.7.1", "gsplat==1.5.3", "packaging"]
 
 [tool.uv]
 conflicts = [[{ extra = "cpu" }, { extra = "cu128" }]]

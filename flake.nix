@@ -39,6 +39,7 @@
             export CUDA_HOME=${cuda.cudatoolkit}
             export CC=${cuda.backendStdenv.cc}/bin/gcc   # nvcc-compatible host compiler
             export CXX=${cuda.backendStdenv.cc}/bin/g++
+            export PATH=${pkgs.ninja}/bin:$PATH
           '';
         };
 
