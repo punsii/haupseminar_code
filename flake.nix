@@ -17,13 +17,16 @@
         pkgs.mkShell {
           packages = with pkgs; [ python312 uv colmap ffmpeg ] ++ packages;
           shellHook = ''
-            # pip wheels (torch, numpy, ...) expect FHS libs
+            # python setup: pip wheels (torch, numpy, ...) expect FHS libs
             export LD_LIBRARY_PATH=${pkgs.lib.makeLibraryPath [ pkgs.stdenv.cc.cc.lib pkgs.zlib ]}
             export UV_PYTHON=${pkgs.python312}/bin/python3
             export UV_PYTHON_DOWNLOADS=never
-            ${extraHook}
             uv sync --extra ${torchExtra}
             source .venv/bin/activate
+
+            # extraHook needs to run after venv activation because gsplat requires ninja to run it's setup
+            ${extraHook}
+
             # src/ layout: makes `python -m realtime_training.train` work from the repo root
             export PYTHONPATH="$PWD/src''${PYTHONPATH:+:$PYTHONPATH}"
           '';
