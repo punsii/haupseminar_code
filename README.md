@@ -125,8 +125,9 @@ Shared by COLMAP, gsplat and `src/data_generator/rgbd_synth.py`.
   densification is not receiving gradients.
 - Offline holdout PSNR below ~25 dB means something is wrong; published 3DGS reaches
   27–31 dB. The superseded `src/poc` loop plateaued near 22 dB.
-- `.envrc` selects a nix shell. If it loads the CPU shell on a CUDA machine, nothing
-  errors. The trainers refuse to start; `src/poc` does not.
+- `.envrc` selects the CUDA shell when an NVIDIA device is present, `.#cpu` otherwise. If
+  the CPU shell is ever used on a CUDA machine, the trainers refuse to start rather than
+  training slowly; `src/poc` does not.
 - Out of memory: lower `--scale` first. It does not bound the Gaussian count — use
   `--strategy mcmc --cap-max` for that.
 - `src/data_generator/rgbd_synth.py` provides exact poses, useful for separating code bugs
