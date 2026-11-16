@@ -8,6 +8,11 @@ dependencies = ["numpy", "imageio"]
 cpu = ["torch==2.7.1"]
 cu128 = ["torch==2.7.1", "gsplat==1.5.3", "packaging"]
 
+[tool.pyright]
+# src/ layout without a build backend; flake.nix puts src on PYTHONPATH at runtime.
+extraPaths = ["src"]
+reportMissingImports = "warning" # gsplat resolves only under the cu128 extra
+
 [tool.uv]
 conflicts = [[{ extra = "cpu" }, { extra = "cu128" }]]
 

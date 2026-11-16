@@ -24,6 +24,8 @@
             ${extraHook}
             uv sync --extra ${torchExtra}
             source .venv/bin/activate
+            # src/ layout: makes `python -m realtime_training.train` work from the repo root
+            export PYTHONPATH="$PWD/src''${PYTHONPATH:+:$PYTHONPATH}"
           '';
         };
     in
